@@ -46,7 +46,16 @@ export class Feedback extends Component {
         const totalFeedback = this.countTotalFeedback();
         const positivePercentage = this.countPositiveFeedbackPercentage();
         return (
-            <div>
+            <div
+              style={{
+                height: '100vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: 40,
+                color: '#010101'
+              }}
+            >
                 <Section title="Please leave feedback">
                     <FeedbackOptions 
                         good={this.good} 
