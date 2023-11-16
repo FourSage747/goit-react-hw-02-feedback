@@ -9,20 +9,25 @@ export class App extends Component {
       good: 0,
       neutral: 0,
       bad: 0,
-      hasFeedback: false
   }
 
-  good = () => {
-      this.setState((prevState) => ({ good: prevState.good + 1, hasFeedback: true }));
+  handleClick = (option) => {
+    this.setState(prev => ({
+        [option]: prev[option] + 1,
+    }));
   }
 
-  neutral = () => {
-      this.setState((prevState) => ({ neutral: prevState.neutral + 1, hasFeedback: true }));
-  }
+//   good = () => {
+//       this.setState((prevState) => ({ good: prevState.good + 1}));
+//   }
 
-  bad = () => {
-      this.setState((prevState) => ({ bad: prevState.bad + 1, hasFeedback: true }));
-  }
+//   neutral = () => {
+//       this.setState((prevState) => ({ neutral: prevState.neutral + 1}));
+//   }
+
+//   bad = () => {
+//       this.setState((prevState) => ({ bad: prevState.bad + 1}));
+//   }
   countTotalFeedback = () => {
       const { good, neutral, bad } = this.state;
       return good + neutral + bad;
@@ -42,30 +47,33 @@ export class App extends Component {
   
 
   render () {
-      const { good, neutral, bad, hasFeedback } = this.state
+      const { good, neutral, bad } = this.state
       const totalFeedback = this.countTotalFeedback();
       const positivePercentage = this.countPositiveFeedbackPercentage();
+      const total = good + neutral + bad;
+      let isShowStatistics = false;
+      if (total > 0) {
+        isShowStatistics = true;
+      }
       return (
           <div
             style={{
               height: '100vh',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
               alignItems: 'center',
-              fontSize: 40,
+              fontSize: 30,
               color: '#010101'
             }}
           >
               <Section title="Please leave feedback">
                   <FeedbackOptions 
-                      good={this.good} 
-                      neutral={this.neutral} 
-                      bad={this.bad}
+                     options={Object.keys(this.state)}
+                     onLeaveFeedback={this.handleClick}
                   />
               </Section>
               <Section title="Statistics">
-                  {hasFeedback && <Statistics 
+                  {isShowStatistics && <Statistics 
                       good={good} 
                       neutral={neutral} 
                       bad={bad} 
@@ -73,7 +81,7 @@ export class App extends Component {
                       positivePercentage={positivePercentage}
                   />}
               </Section>
-              <Notification message="There is no feedback" hasFeedback={hasFeedback} />
+              <Notification message="There is no feedback" isShowStatistics={isShowStatistics} />
           </div>
       )
   }

@@ -1,5 +1,5 @@
-export const Notification = ({message, hasFeedback}) => {
-    if (hasFeedback) {
+export const Notification = ({message, isShowStatistics}) => {
+    if (isShowStatistics) {
         return
     }
     return (
