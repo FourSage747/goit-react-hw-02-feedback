@@ -72,16 +72,20 @@ export class App extends Component {
                      onLeaveFeedback={this.handleClick}
                   />
               </Section>
-              <Section title="Statistics">
-                  {isShowStatistics && <Statistics 
-                      good={good} 
-                      neutral={neutral} 
-                      bad={bad} 
-                      total={totalFeedback} 
-                      positivePercentage={positivePercentage}
-                  />}
-              </Section>
-              <Notification message="There is no feedback" isShowStatistics={isShowStatistics} />
+              {isShowStatistics ? (
+                <Section title="Statistics">
+                <Statistics 
+                    good={good} 
+                    neutral={neutral} 
+                    bad={bad} 
+                    total={totalFeedback} 
+                    positivePercentage={positivePercentage}
+                />
+                </Section>
+              )
+              :
+              (<Notification message="There is no feedback" />)
+              }
           </div>
       )
   }

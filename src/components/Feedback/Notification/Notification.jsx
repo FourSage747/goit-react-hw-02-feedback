@@ -1,7 +1,4 @@
-export const Notification = ({message, isShowStatistics}) => {
-    if (isShowStatistics) {
-        return
-    }
+export const Notification = ({message}) => {
     return (
         <p>{message}</p>
     )
