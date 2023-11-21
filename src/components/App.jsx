@@ -51,10 +51,7 @@ export class App extends Component {
       const totalFeedback = this.countTotalFeedback();
       const positivePercentage = this.countPositiveFeedbackPercentage();
       const total = good + neutral + bad;
-      let isShowStatistics = false;
-      if (total > 0) {
-        isShowStatistics = true;
-      }
+      let isShowStatistics = total > 0;
       return (
           <div
             style={{
